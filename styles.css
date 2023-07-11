@@ -1,0 +1,196 @@
+:root {
+    --colourStrong: #ffa200;
+    --colourMid: #cb840a;
+    --colourLight: #a5691f;
+    --colourLightest: #845010;
+    --colourAlmostWhite: #f9e0b6;
+}
+
+html {
+    min-height: max-content;
+}
+
+body {
+    min-height: max-content;
+    height: 100%;
+
+    overflow-x: hidden;
+    margin: 0;
+    padding: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    background-color: rgb(35, 35, 35);
+
+    overflow-x: hidden;
+
+    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    color: var(--colourStrong);
+
+    display: flex;
+    justify-content: center;
+}
+
+#container {
+    max-width: 100%;
+}
+
+#container > #countdowns {
+    display: grid;
+    grid-template-columns: 100%;
+
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+#container > *:last-child {
+    margin-bottom: 0;
+}
+
+.header {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    margin-bottom: 20px;
+}
+
+.header h1 {
+    margin: 0;
+    color: white;
+    font-weight: 300;
+}
+
+.header button {
+    border: none;
+
+    background-color: var(--colourAlmostWhite);
+    color: var(--colourLightest);
+
+    padding: 7px 15px 7px 15px;
+    border-radius: 100em;
+    font-weight: 500;
+    font-size: 0.8em;
+
+    cursor: pointer;
+}
+
+.countdown {
+    background-color: #080808;
+    padding: 20px;
+    border-radius: 1em;
+    box-sizing: border-box;
+
+    margin: auto 0 auto 0;
+
+    display: flex;
+    width: 100%;
+    gap: 20px;
+}
+
+.countdown > * {
+    display: block;
+    width: max-content;
+
+    margin: auto 0 auto 0;
+}
+
+.countdown #grouping {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.countdown button#remove {
+    position: relative;
+    height: 50px;
+    width: 50px;
+    border-radius: 100%;
+    margin-right: 10px;
+
+    cursor: pointer;
+
+    border: none;
+    background-color: #6f6e6b;
+}
+
+.countdown button#remove::after {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    translate: -50% -50%;
+    text-align: center;
+
+    color: white;
+    font-size: 2em;
+
+    content: 'x';
+}
+
+.countdown #title {
+    white-space: normal;
+    /* width: 100%; */
+    width: fit-content;
+    font-weight: 700;
+}
+
+.countdown #counter {
+    font-size: 1.5em;
+    line-height: 95%;
+    color: #454545;
+
+
+    margin-left: auto;
+}
+
+.countdown #counter .value {
+    color: var(--colourStrong);
+    font-weight: 600;
+}
+
+.countdown #counter .legend {
+    color: var(--colourMid);
+    font-weight: 400;
+}
+
+.countdown #shorthand {
+    line-height: 95%;
+}
+
+.countdown #shorthand .value {
+    font-size: 2em;
+    font-weight: 500;
+}
+
+.countdown #shorthand .legend {
+    color: var(--colourLight);
+    font-weight: 300;
+    text-align: right;
+    display: block;
+}
+
+@media screen and (max-width: 5in) {
+    #container {
+        min-width: 95%;
+    }
+
+    .countdown {
+        flex-direction: column;
+        gap: 30px;
+    }
+
+    .countdown #counter {
+        margin-left: 0;
+        width: 100%;
+    }
+
+    .countdown #shorthand .legend {
+        display: inline-block;
+    }
+}
+
+@media screen and (max-width: 3.5in) {
+    .countdown #grouping {
+        flex-direction: column !important;
+        align-items: flex-start;
+    }
+}
