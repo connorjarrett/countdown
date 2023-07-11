@@ -1,0 +1,14 @@
+{
+    "recurring": [
+        {
+            "event": "New Year",
+            "timestamp": 1704067200
+        }
+    ],
+    "oneTime": [
+        {
+            "event": "End of the world",
+            "timestamp": 4844770412
+        }
+    ]
+}
