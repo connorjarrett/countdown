@@ -30,6 +30,23 @@ function invokeTimer(frame, event) {
     }, 100)
 }
 
+function generateFrame(parent) {
+    const frame = document.createElement("div")
+    frame.classList = "countdown"
+    frame.innerHTML = `
+        <div id="grouping">
+            <button id="remove"></button>
+            <h2 id="title"></h2> 
+        </div>
+        <h2 id="counter"></h2>
+        <h3 id="shorthand"></h3>
+    `
+
+    parent.appendChild(frame)
+
+    return frame
+}
+
 $.ajax({
     url: "events.json",
     async: false,
@@ -87,45 +104,20 @@ $.ajax({
         document.title = `Countdown to ${events[0].event}`
 
         for (let i=0; i<events.length; i++) {
-            const frame = document.createElement("div")
-            frame.classList = "countdown"
-            frame.innerHTML = `
-                <div id="grouping">
-                    <button id="remove"></button>
-                    <h2 id="title"></h2> 
-                </div>
-                <h2 id="counter"></h2>
-                <h3 id="shorthand"></h3>
-            `
-
-            document.querySelector("body > #container > #countdowns").appendChild(frame)
+            const frame = generateFrame(document.querySelector("body > #container > #countdowns"))
 
             invokeTimer(frame, events[i])
         }
     },
     error: function(xhr){
-        const baseError = document.createElement("div")
-        baseError.classList = "countdown"
-        baseError.innerHTML = `
-            <div id="grouping">
-                <button id="remove"></button>
-                <h2 id="title">Error fetching events.json</h2> 
-            </div>
-            <h2 id="counter"><span class="legend">Have you checked to make sure that <code>/events.json</code> exists and is set up proplerly?</span></h2>
-        `
+        const baseError = generateFrame(document.querySelector("body > #container > #countdowns"))
+        baseError.querySelector("#title").innerHTML = "Error fetching events.json"
+        baseError.querySelector("#counter").innerHTML = '<span class="legend">Have you checked to make sure that <code>/events.json</code> exists and is set up proplerly?</span>'
 
-        const customError = document.createElement("div")
-        customError.classList = "countdown"
-        customError.innerHTML = `
-            <div id="grouping">
-                <button id="remove"></button>
-                <h2 id="title">Error ${xhr.status}</h2> 
-            </div>
-            <h2 style="margin-left: 0;" id="counter"><span class="value">Here's what we know: </span><span class="legend">${xhr.statusText}</span></h2>
-        `
-
-        document.querySelector("body > #container > #countdowns").appendChild(baseError)
-        document.querySelector("body > #container > #countdowns").appendChild(customError)
+        const customError = generateFrame(document.querySelector("body > #container > #countdowns"))
+        customError.querySelector("#title").innerHTML = `Error ${xhr.status}`
+        customError.querySelector("#counter").style.marginLeft = 0
+        customError.querySelector("#counter").innerHTML = `<span class="value">Here's what we know: </span><span class="legend">${xhr.statusText}</span>`
     }
 })
 
@@ -139,17 +131,7 @@ $("#newtimer").submit(function(e){
     }
 
     if (event.timestamp > Date.now()) {
-        const frame = document.createElement("div")
-        frame.classList = "countdown"
-        frame.innerHTML = `
-            <div id="grouping">
-                <h2 id="title"></h2> 
-            </div>
-            <h2 id="counter"></h2>
-            <h3 id="shorthand"></h3>
-        `
-
-        document.querySelector("body > #container > #countdowns").appendChild(frame)
+        const frame = generateFrame(document.querySelector("body > #container > #countdowns"))
 
         invokeTimer(frame, event)
     } else {
