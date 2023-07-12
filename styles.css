@@ -112,7 +112,6 @@ body {
     cursor: pointer;
 
     border: none;
-    background-color: #6f6e6b;
 }
 
 .countdown button::after {
@@ -122,10 +121,27 @@ body {
     translate: -50% -50%;
     text-align: center;
 
-    color: white;
-    font-size: 2em;
+    width: 50%;
+    height: 50%;
 
-    content: 'x';
+    background-size: contain;
+    content: '';
+}
+
+.countdown button#remove {
+    background-color: #6f6e6b;
+}
+
+.countdown button#remove::after {
+    background-image: url("./icons/close.svg");
+}
+
+.countdown button#fullscreen {
+    background-color: #522f10;
+}
+
+.countdown button#fullscreen::after {
+    background-image: url("./icons/fullscreen.svg");
 }
 
 .countdown #title {

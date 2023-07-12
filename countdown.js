@@ -36,6 +36,8 @@ function generateFrame(parent) {
     frame.innerHTML = `
         <div id="grouping">
             <button id="remove"></button>
+            <button id="fullscreen"></button>
+        </div>
             <h2 id="title"></h2> 
         </div>
         <h2 id="counter"></h2>
