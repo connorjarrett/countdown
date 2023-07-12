@@ -38,7 +38,7 @@ function generateFrame(parent) {
             <button id="remove"></button>
             <button id="fullscreen"></button>
         </div>
-            <h2 id="title"></h2> 
+        <h2 id="title"></h2> 
         <h2 id="counter"></h2>
         <h3 id="shorthand"></h3>
     `
