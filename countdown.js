@@ -1,5 +1,11 @@
+import { removeCountdown, fullscreen } from "./interact"
+
 function invokeTimer(frame, event) {
     frame.querySelector("#title").innerHTML = `${event.event}`
+    frame.dataset.timestamp = JSON.stringify(event.timestamp)
+
+    $(frame).find("button#remove").click(removeCountdown)
+    $(frame).find("button#fullscreen").click(fullscreen)
 
     const interval = setInterval(function(){
         const timeLeft = event.timestamp - Date.now()

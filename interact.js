@@ -1,4 +1,4 @@
-function toggleView() {
+export function toggleView() {
     const button = $("button#showless")[0]
     const container = $("#countdowns")[0]
 
@@ -23,10 +23,16 @@ function toggleView() {
     }
 }
 
-function removeCountdown() {
-    const countdown = this.parentNode.parentNode
-    countdown.remove()
+export function fullscreen() {
+    const button = this
+    const container = this.parentNode.parentNode
+
+    
 }
 
-$(".countdown button#remove").click(removeCountdown)
-$("button#showless").click(toggleView)
+export function removeCountdown() {
+    const container = this.parentNode.parentNode
+    container.remove()
+}
+
+$("button#showless").unbind("click").click(toggleView)
