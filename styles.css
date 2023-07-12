@@ -219,7 +219,7 @@ body {
 }
 
 section.new {
-    color: var(--colourMid);
+    color: var(--colourStrong);
     background-color: var(--timerColour);
     border-radius: 1em;
 
@@ -239,14 +239,14 @@ section.new form input {
     border-radius: 5px;
     border: none;    
 
-    background-color: var(--colourAlmostWhite);
+    background-color: var(--colourLightest);
 
-    color: var(--colourLightest);
+    color: white;
     font-weight: 400;
 }
 
 section.new form input::placeholder {
-    color: var(--colourLightest);
+    color: white;
 } 
 
 section.new form input[type="datetime-local"] {
