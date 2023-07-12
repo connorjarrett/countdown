@@ -24,3 +24,8 @@ To get the timestamp, visit a website like [unixtimestamp.com](https://www.unixt
 
 ### Temporary
 To create quick, temporary events, you can enter the event name and time at the bottom of the screen
+
+## Known Bugs 🪲
+| Bug | Solution |
+|-|-|
+| After leaving fullscreen, the text overflows from the container | Double click "Show More"/"Show Less" to reset it |
