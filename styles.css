@@ -103,6 +103,7 @@ body {
 }
 
 .countdown button {
+    z-index: 1;
     position: relative;
     height: 50px;
     width: 50px;
@@ -142,6 +143,10 @@ body {
 
 .countdown button#fullscreen::after {
     background-image: url("./icons/fullscreen.svg");
+}
+
+.countdown button#fullscreen[data-on="true"]::after {
+    background-image: url("./icons/fullscreenclose.svg");
 }
 
 .countdown #title {
