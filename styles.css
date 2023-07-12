@@ -102,7 +102,7 @@ body {
     align-items: center;
 }
 
-.countdown button#remove {
+.countdown button {
     position: relative;
     height: 50px;
     width: 50px;
@@ -115,7 +115,7 @@ body {
     background-color: #6f6e6b;
 }
 
-.countdown button#remove::after {
+.countdown button::after {
     position: absolute;
     top: 50%;
     left: 50%;
