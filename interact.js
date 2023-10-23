@@ -57,6 +57,17 @@ export function fullscreen() {
 export function removeCountdown() {
     const container = this.parentNode.parentNode
     container.remove()
+
+    if (window.localStorage.getItem("userEvents")) {
+        let local = JSON.parse(window.localStorage.getItem("userEvents"))
+        let event = local.oneTime.findIndex(e => e.timestamp == parseInt(container.dataset.timestamp) / 1000)
+
+        if (event > -1) {
+            local.oneTime.splice(event, 1);
+
+            window.localStorage.setItem("userEvents", JSON.stringify(local))
+        }
+    }
 }
 
 $("button#showless").unbind("click").click(toggleView)

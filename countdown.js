@@ -58,10 +58,19 @@ $.ajax({
     url: "events.json",
     async: false,
     success: function(userEvents) {
-        const recurring = userEvents.recurring
-        const oneTime = userEvents.oneTime
+        if (!window.localStorage.getItem("userEvents")) {
+            window.localStorage.setItem("userEvents", JSON.stringify({
+                "recurring": [],
+                "oneTime": []
+            }))
+        }
 
-        const outPlaint = `0 days : 0 hours : 0 minutes : 0 seconds`
+        const local = JSON.parse(window.localStorage.getItem("userEvents"))
+
+        const recurring = [userEvents.recurring, local.recurring].flat()
+        const oneTime = [userEvents.oneTime, local.oneTime].flat()
+
+        const outPlain = `0 days : 0 hours : 0 minutes : 0 seconds`
         const outFormatted = (`<span class="value" id="val-days">0</span> <span class="legend" id="leg-days">days</span> : <span class="value" id="val-hours">0</span> <span class="legend" id="leg-hours">hours</span> : <span class="value" id="val-minutes">0</span> <span class="legend" id="leg-minutes">minutes</span> : <span class="value" id="val-seconds">0</span> <span class="legend" id="leg-seconds">seconds</span>`)
 
         var events = []
@@ -134,10 +143,22 @@ $("#newtimer").submit(function(e){
 
     const event = {
         "event": input[0].value,
-        "timestamp": new Date(input[1].value).valueOf()
+        "timestamp": new Date(input[1].value).valueOf() / 1000
     }
 
-    if (event.timestamp > Date.now()) {
+    if (!window.localStorage.getItem("userEvents")) {
+        window.localStorage.setItem("userEvents", JSON.stringify({
+            "recurring": [],
+            "oneTime": []
+        }))
+    }
+
+    let updated = JSON.parse(window.localStorage.getItem("userEvents"))
+    updated.oneTime.push(event)
+
+    window.localStorage.setItem("userEvents", JSON.stringify(updated))
+
+    if (event.timestamp * 1000 > Date.now()) {
         const frame = generateFrame(document.querySelector("body > #container > #countdowns"))
 
         invokeTimer(frame, event)
