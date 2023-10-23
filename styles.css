@@ -250,7 +250,7 @@ section.new form input::placeholder {
 } 
 
 section.new form input[type="datetime-local"] {
-    color: black;
+    color: white;
 }
 
 section.new form input[type="submit"] {
