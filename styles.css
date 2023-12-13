@@ -5,7 +5,7 @@
     --colourLightest: #845010;
     --colourAlmostWhite: #f9e0b6;
 
-    --timerColour: #080808;
+    --timerColour: rgb(7, 7, 7)
 }
 
 html {
@@ -21,7 +21,8 @@ body {
     padding: 20px;
     box-sizing: border-box;
     width: 100%;
-    background-color: rgb(35, 35, 35);
+    background-color:#000000 ;
+
 
     overflow-x: hidden;
 
@@ -65,8 +66,8 @@ body {
 .header button {
     border: none;
 
-    background-color: var(--colourAlmostWhite);
-    color: var(--colourLightest);
+    background-color: var(--colourStrong);
+    color: #170f00;
 
     padding: 7px 15px 7px 15px;
     border-radius: 100em;
@@ -235,14 +236,18 @@ section.new form {
 }
 
 section.new form input {
-    padding: 10px;
+    padding: 20px 10px 20px 10px;
     border-radius: 5px;
     border: none;    
 
-    background-color: var(--colourLightest);
+    background-color: #1c1c1c;
 
     color: white;
-    font-weight: 400;
+    font-weight: 500;
+    font-size: 0.95em;
+
+    width: 100%;
+    box-sizing: border-box;
 }
 
 section.new form input::placeholder {
@@ -250,10 +255,14 @@ section.new form input::placeholder {
 } 
 
 section.new form input[type="datetime-local"] {
-    color: white;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    text-align: left;
 }
 
 section.new form input[type="submit"] {
     cursor: pointer;
     font-weight: 600;
+    background-color: var(--colourLightest);
 }
