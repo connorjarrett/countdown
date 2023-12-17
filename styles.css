@@ -235,7 +235,7 @@ section.new form {
     gap: 5px;
 }
 
-section.new form input {
+section.new form input, section.new form select {
     padding: 20px 10px 20px 10px;
     border-radius: 5px;
     border: none;    
@@ -248,6 +248,12 @@ section.new form input {
 
     width: 100%;
     box-sizing: border-box;
+}
+
+section.new form select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
 }
 
 section.new form input::placeholder {

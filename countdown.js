@@ -21,6 +21,9 @@ function invokeTimer(frame, event) {
         const shorthand = (timeLeft / (1000 * 60 * 60 * 24)).toFixed(2);
         const shorthandFormatted = `<span class="value">${shorthand}</span><span class="legend"> days</span>`
 
+        const outPlain = `0 days : 0 hours : 0 minutes : 0 seconds`
+        const outFormatted = (`<span class="value" id="val-days">0</span> <span class="legend" id="leg-days">days</span> : <span class="value" id="val-hours">0</span> <span class="legend" id="leg-hours">hours</span> : <span class="value" id="val-minutes">0</span> <span class="legend" id="leg-minutes">minutes</span> : <span class="value" id="val-seconds">0</span> <span class="legend" id="leg-seconds">seconds</span>`)
+
         if (timeLeft > 0) {
             frame.querySelector("#counter").innerHTML = formatted
 
@@ -70,9 +73,6 @@ $.ajax({
         const recurring = [userEvents.recurring, local.recurring].flat()
         const oneTime = [userEvents.oneTime, local.oneTime].flat()
 
-        const outPlain = `0 days : 0 hours : 0 minutes : 0 seconds`
-        const outFormatted = (`<span class="value" id="val-days">0</span> <span class="legend" id="leg-days">days</span> : <span class="value" id="val-hours">0</span> <span class="legend" id="leg-hours">hours</span> : <span class="value" id="val-minutes">0</span> <span class="legend" id="leg-minutes">minutes</span> : <span class="value" id="val-seconds">0</span> <span class="legend" id="leg-seconds">seconds</span>`)
-
         var events = []
 
         for (let i=0; i<oneTime.length; i++) {
@@ -106,6 +106,11 @@ $.ajax({
         }
 
         events = events.filter(e => e.timestamp >= Date.now() && e.timestamp <= (Date.now() + 31556926000))
+
+        if (window.localStorage.getItem("userRemoved")) {
+            events = events.filter(e => !JSON.parse(window.localStorage.getItem("userRemoved")).find(t => e.timestamp / 1000 == t))
+        }
+
 
         events.sort(function(a,b){
             return a.timestamp > b.timestamp
@@ -154,13 +159,18 @@ $("#newtimer").submit(function(e){
     }
 
     let updated = JSON.parse(window.localStorage.getItem("userEvents"))
-    updated.oneTime.push(event)
+    
+    if (input[2].value == "1") {
+        updated.oneTime.push(event)
+    } else {
+        updated.recurring.push(event)
+    }
 
     window.localStorage.setItem("userEvents", JSON.stringify(updated))
 
-    if (event.timestamp * 1000 > Date.now()) {
+    if (event.timestamp * 1000 > Date.now() || input[2].value == "2") {
         const frame = generateFrame(document.querySelector("body > #container > #countdowns"))
-
+        window.location.reload()
         invokeTimer(frame, event)
     } else {
         alert("Cannot set timers in the past")

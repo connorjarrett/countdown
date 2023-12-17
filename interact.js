@@ -60,12 +60,23 @@ export function removeCountdown() {
 
     if (window.localStorage.getItem("userEvents")) {
         let local = JSON.parse(window.localStorage.getItem("userEvents"))
-        let event = local.oneTime.findIndex(e => e.timestamp == parseInt(container.dataset.timestamp) / 1000)
+        
+        let oneTime = local.oneTime.findIndex(e => e.timestamp == parseInt(container.dataset.timestamp) / 1000)
+        let recurring = local.recurring.findIndex(e => e.timestamp == parseInt(container.dataset.timestamp) / 1000)
 
-        if (event > -1) {
-            local.oneTime.splice(event, 1);
+        if (oneTime > -1 || recurring > -1) {
+            local[(oneTime > -1 ? "oneTime" : "recurring")].splice((oneTime > -1 ? oneTime : recurring), 1);
 
             window.localStorage.setItem("userEvents", JSON.stringify(local))
+        } else {
+            if (!window.localStorage.getItem("userRemoved")) {
+                window.localStorage.setItem("userRemoved", "[]")
+            }
+    
+            let local = JSON.parse(window.localStorage.getItem("userRemoved"))
+    
+            local.push(parseInt(container.dataset.timestamp) / 1000)
+            window.localStorage.setItem("userRemoved", JSON.stringify(local))
         }
     }
 }

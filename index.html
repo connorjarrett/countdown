@@ -5,6 +5,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes"  />
+    <meta name="theme-color" content="#000000">
 
     
     <script src="./jquery.js"></script>
@@ -32,6 +33,10 @@
             <form id="newtimer">
                 <input type="text" placeholder="Event Name" name="name" required>
                 <input type="datetime-local" name="datetime" required>
+                <select name="type">
+                    <option value="1">One Time</option>
+                    <option value="2">Recurring</option>
+                </select>
                 <input type="submit" value="Add Event">
             </form>
         </section>
